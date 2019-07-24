@@ -109,7 +109,8 @@ class App extends Component {
                 })
                     .then(response => response.json())
                     .then(count => {
-                        this.setState(Object.assign(this.state.user.entries, { entries: count}))
+                        this.setState(Object.assign(this.state.user, { entries: count}))
+                        console.log('here', this.state.user)
                     })
             }
             this.displayFaceBox(this.calculateFaceLocation(response))
