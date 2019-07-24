@@ -1,0 +1,10 @@
+.Tilt {
+    background: rgba(255, 255, 255, 0.164); 
+}
+
+@media only screen and (max-width: 600px) {
+    .centerLogo {
+        display: flex;
+        justify-content: center;
+    }
+}
