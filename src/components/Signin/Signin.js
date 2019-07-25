@@ -10,12 +10,7 @@ class SignIn extends Component {
             signInPassword: ''
         }
     }
-    // Integrating SERVER API
-    // componentDidMount() {
-    //     fetch('http://localhost:8080/')
-    //         .then(response => response.json())
-    //         .then(data => console.log(data))
-    // }
+
 
     onEmailChange = (event) => {
         this.setState({signInEmail: event.target.value})
@@ -25,7 +20,7 @@ class SignIn extends Component {
     }
 
     onSubmitSignIn = () => {
-        fetch('http://localhost:8080/signin', {
+        fetch('https://immense-cliffs-81793.herokuapp.com/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
