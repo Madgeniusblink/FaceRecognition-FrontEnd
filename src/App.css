@@ -17,3 +17,15 @@
   left: 0;
   z-index: -1
 }
+
+.hover-black:hover {
+  background-color: black !important;
+}
+
+.dropdown-menu-right {
+  right:0!important;
+}
+
+.white-letter:hover {
+  color: white !important;
+}

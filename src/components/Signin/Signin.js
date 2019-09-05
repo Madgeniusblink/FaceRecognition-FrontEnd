@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-
 // To make a Smart component Change it to a class
 class SignIn extends Component {
     constructor(props) {
@@ -19,8 +18,12 @@ class SignIn extends Component {
         this.setState({signInPassword: event.target.value})
     }
 
+    saveAuthTokenInSession = (token) => {
+        window.sessionStorage.setItem('token', token)
+    }
+
     onSubmitSignIn = () => {
-        fetch('https://immense-cliffs-81793.herokuapp.com/signin', {
+        fetch('http://localhost:8080/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -29,10 +32,24 @@ class SignIn extends Component {
             })
         })
             .then((response) => response.json())
-            .then(user => {
-                if(user.id){
-                  this.props.loadUser(user);
-                  this.props.onRouteChange('home');
+            .then(data => {
+                if (data.userId && data.success === 'true') {
+                    this.saveAuthTokenInSession(data.token)
+                    fetch(`http://localhost:8080/profile/${data.userId}`, {
+                        method: 'get',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': data.token
+                        }
+                    })
+                    .then(resp => resp.json())
+                    .then(user => {
+                        if (user && user.email) {
+                            this.props.loadUser(user)
+                            this.props.onRouteChange('home')
+                        }
+                    })
+                .catch(console.log)
                 }
             })
     }
@@ -49,14 +66,14 @@ class SignIn extends Component {
                                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                                 <input 
                                     onChange={this.onEmailChange}
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address"
+                                    className="hover-black pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address"
                                 />
                             </div>
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                                 <input 
                                     onChange={this.onPasswordChange}
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password"
+                                    className="hover-black b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password"
                                 />
                             </div>
                         </fieldset>

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Register extends Component {
     constructor(props) {
         super(props) 
-        this.states = {
+        this.state = {
             registerName: '',
             registerEmail: '',
             registerPassword: ''
@@ -20,7 +20,7 @@ class Register extends Component {
     }
 
     onSubmitSignIn = () => {
-        fetch('https://immense-cliffs-81793.herokuapp.com/register', {
+        fetch('http://localhost:8080/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -48,7 +48,7 @@ class Register extends Component {
                                 <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
                                 <input
                                     onChange={this.onNameChange}
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    className="hover-black pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                     type="text" 
                                     name="name"  
                                     id="name"
@@ -58,7 +58,7 @@ class Register extends Component {
                                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                                 <input
                                     onChange={this.onEmailChange}
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    className="hover-black pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                     type="email" 
                                     name="email-address"  
                                     id="email-address"
@@ -68,7 +68,7 @@ class Register extends Component {
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                                 <input
                                     onChange={this.onPasswordChange}
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    className="hover-black b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                     type="password" 
                                     name="password"  
                                     id="password"
@@ -78,7 +78,7 @@ class Register extends Component {
                         <div className="">
                             <input 
                             onClick={this.onSubmitSignIn}
-                            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register"/>
+                            className="hover-black b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register"/>
                         </div>
                     </div>
                 </main>
